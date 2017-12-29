@@ -1,0 +1,12 @@
+.main{
+  position: relative;
+  width: 640px;
+  margin: 0px auto 0;
+  background-color: #eee;
+}
+
+.cnvs{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
