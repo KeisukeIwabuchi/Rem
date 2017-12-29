@@ -1,52 +1,112 @@
-var Rem = Rem || {};
-
-onload = function(){
-  Rem.draw();
+function Rem (id, size) {
+  this.id            = id
+  this.size          = size
+  this.frizz         = ''
+  this.hair          = ''
+  this.face          = ''
+  this.eyebrows      = ''
+  this.bangs         = ''
+  this.eye           = ''
+  this.mouth         = ''
+  this.nose          = ''
+  this.ear           = ''
+  this.cheek         = ''
+  this.barrette      = ''
+  this.hairornaments = ''
 }
 
-Rem.frizz         = document.getElementById('frizz').getContext('2d');
-Rem.hair          = document.getElementById('hair').getContext('2d');
-Rem.face          = document.getElementById('face').getContext('2d');
-Rem.eyebrows      = document.getElementById('eyebrows').getContext('2d');
-Rem.bangs         = document.getElementById('bangs').getContext('2d');
-Rem.eye           = document.getElementById('eye').getContext('2d');
-Rem.mouth         = document.getElementById('mouth').getContext('2d');
-Rem.nose          = document.getElementById('nose').getContext('2d');
-Rem.ear           = document.getElementById('ear').getContext('2d');
-Rem.cheek         = document.getElementById('cheek').getContext('2d');
-Rem.barrette      = document.getElementById('barrette').getContext('2d');
-Rem.hairornaments = document.getElementById('hairornaments').getContext('2d');
 
-Rem.draw = function() {
-  Rem.setFrizz();
-  Rem.setHair();
-  Rem.setFace();
-  Rem.setEyebrows();
-  Rem.setBangs();
-  Rem.setEye();
-  Rem.setMouth();
-  Rem.setNose();
-  Rem.setEar();
-  Rem.setCheeks();
-  Rem.setBarrette();
-  //Rem.setHeadband();
-  Rem.setHairOrnaments();
+Rem.prototype.Draw = function Draw () {
+  var main = document.getElementById(this.id)
+  var cnv
+  var types = [
+    'frizz',
+    'hair',
+    'face',
+    'eyebrows',
+    'bangs',
+    'eye',
+    'mouth',
+    'nose',
+    'ear',
+    'cheek',
+    'barrette',
+    'hairornaments'
+  ]
+
+  for (var i = 0; i < types.length; i++) {
+    cnv = document.createElement('canvas')
+    cnv.classList.add('cnvs')
+    cnv.width = this.size
+    cnv.height = this.size
+    cnv.id = types[i]
+    main.appendChild(cnv)
+  }
+
+  this.frizz         = document.getElementById('frizz').getContext('2d')
+  this.hair          = document.getElementById('hair').getContext('2d')
+  this.face          = document.getElementById('face').getContext('2d')
+  this.eyebrows      = document.getElementById('eyebrows').getContext('2d')
+  this.bangs         = document.getElementById('bangs').getContext('2d')
+  this.eye           = document.getElementById('eye').getContext('2d')
+  this.mouth         = document.getElementById('mouth').getContext('2d')
+  this.nose          = document.getElementById('nose').getContext('2d')
+  this.ear           = document.getElementById('ear').getContext('2d')
+  this.cheek         = document.getElementById('cheek').getContext('2d')
+  this.barrette      = document.getElementById('barrette').getContext('2d')
+  this.hairornaments = document.getElementById('hairornaments').getContext('2d')
+
+  this.setFrizz()
+  this.setHair()
+  this.setFace()
+  this.setEyebrows()
+  this.setBangs()
+  this.setEye()
+  this.setMouth()
+  this.setNose()
+  this.setEar()
+  this.setCheeks()
+  this.setBarrette()
+  this.setHairOrnaments()
 }
 
-Rem.setFrizz = function() {
-  this.frizz.beginPath();
-  this.frizz.moveTo(79, 272);
-  this.frizz.quadraticCurveTo(35, 360, 50, 440);
-  this.frizz.bezierCurveTo(60, 520, 120, 520, 145, 482);
-  this.frizz.bezierCurveTo(80, 510, 70, 495, 58, 427);
-  this.frizz.quadraticCurveTo(45, 360, 79, 272);
-
-  this.frizz.fillStyle = '#89B7F2';
-  this.frizz.fill();
-  this.frizz.stroke();
+Rem.prototype.modifyValue = function modifyValue (value) {
+  return (value / 640) * this.size
 }
 
-Rem.setHair = function() {
+Rem.prototype.setFrizz = function setFrizz () {
+  this.frizz.beginPath()
+  this.frizz.moveTo(this.modifyValue(79), this.modifyValue(272))
+  this.frizz.quadraticCurveTo(
+    this.modifyValue(35),
+    this.modifyValue(360),
+    this.modifyValue(50),
+    this.modifyValue(440)
+  );
+  this.frizz.bezierCurveTo(
+    this.modifyValue(60),
+    this.modifyValue(520),
+    this.modifyValue(120),
+    this.modifyValue(520),
+    this.modifyValue(145),
+    this.modifyValue(482)
+  )
+  this.frizz.bezierCurveTo(
+    80,
+    510,
+    70,
+    495,
+    58,
+    427
+  )
+  this.frizz.quadraticCurveTo(45, 360, 79, 272)
+
+  this.frizz.fillStyle = '#89B7F2'
+  this.frizz.fill()
+  this.frizz.stroke()
+}
+
+Rem.prototype.setHair = function setHair () {
   this.hair.beginPath();
   this.hair.moveTo(97, 452);
   this.hair.bezierCurveTo(110, 500, 110, 550, 170, 568);
@@ -98,7 +158,7 @@ Rem.setHair = function() {
   this.hair.stroke();
 }
 
-Rem.setFace = function() {
+Rem.prototype.setFace = function setFace () {
   this.face.beginPath();
   this.face.moveTo(160, 480);
   this.face.bezierCurveTo(190, 580, 200, 580, 310, 623);
@@ -113,7 +173,7 @@ Rem.setFace = function() {
   this.face.stroke();
 }
 
-Rem.setEyebrows = function() {
+Rem.prototype.setEyebrows = function setEyebrows () {
   this.eyebrows.beginPath();
   this.eyebrows.moveTo(332, 314);
   this.eyebrows.quadraticCurveTo(337, 317, 338, 320);
@@ -125,7 +185,7 @@ Rem.setEyebrows = function() {
   this.eyebrows.stroke();
 }
 
-Rem.setBangs = function() {
+Rem.prototype.setBangs = function setBangs () {
   //大枠
   this.bangs.beginPath();
   this.bangs.moveTo(133, 188);
@@ -258,7 +318,7 @@ Rem.setBangs = function() {
   this.bangs.stroke();
 }
 
-Rem.setEye = function() {
+Rem.prototype.setEye = function setEye () {
   this.eye.beginPath();
   this.eye.moveTo(354, 382);
   this.eye.bezierCurveTo(350, 400, 340, 430, 374, 456);
@@ -385,7 +445,7 @@ Rem.setEye = function() {
   this.eye.stroke();
 }
 
-Rem.setMouth = function() {
+Rem.prototype.setMouth = function setMouth () {
   this.mouth.beginPath();
   this.mouth.moveTo(287, 572);
   this.mouth.bezierCurveTo(290, 579, 303, 580, 306, 577);
@@ -397,7 +457,7 @@ Rem.setMouth = function() {
   this.mouth.stroke();
 }
 
-Rem.setNose = function() {
+Rem.prototype.setNose = function setNose () {
   this.nose.beginPath();
   this.nose.moveTo(270, 498);
   this.nose.lineTo(274, 506);
@@ -409,7 +469,7 @@ Rem.setNose = function() {
   this.nose.stroke();
 }
 
-Rem.setEar = function() {
+Rem.prototype.setEar = function setEar () {
   this.ear.beginPath();
   this.ear.moveTo(509, 398);
   this.ear.quadraticCurveTo(515, 390, 524, 391);
@@ -432,7 +492,7 @@ Rem.setEar = function() {
   this.ear.stroke();
 }
 
-Rem.setCheeks = function() {
+Rem.prototype.setCheeks = function setCheeks () {
   var gra  = this.cheek.createRadialGradient(435, 480, 7, 435, 480, 30);
   gra.addColorStop(0,'#FED8D2');
   gra.addColorStop(1,'#FBEDEA');
@@ -458,7 +518,7 @@ Rem.setCheeks = function() {
   this.cheek.stroke();
 }
 
-Rem.setBarrette = function() {
+Rem.prototype.setBarrette = function setBarrette () {
   this.barrette.beginPath();
   this.barrette.moveTo(382, 239);
   this.barrette.quadraticCurveTo(435, 258, 480, 266);
@@ -485,7 +545,7 @@ Rem.setBarrette = function() {
   this.barrette.stroke();
 }
 
-Rem.setHairOrnaments = function() {
+Rem.prototype.setHairOrnaments = function setHairOrnaments () {
   this.hairornaments.beginPath();
   this.hairornaments.moveTo(538, 299);
   this.hairornaments.quadraticCurveTo(605, 460, 500, 640);

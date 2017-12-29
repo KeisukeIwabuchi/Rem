@@ -4,28 +4,13 @@
   <meta charset="utf-8">
   <title>レム</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/rem.js"></script>
 </head>
 <body>
-  <div class="main">
-    <canvas class="cnvs" width="640" height="640" id="frizz"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="hair"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="face"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="eyebrows"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="cheek"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="bangs"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="eye"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="mouth"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="nose"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="ear"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="barrette"></canvas>
-    <canvas class="cnvs" width="640" height="640" id="hairornaments"></canvas>
-  </div>
-  <script src="js/rem2.js"></script>
+  <div id="main"></div>
   <script>
-    var rem = new Rem(640);
-    onload = function () {
-      rem.Draw();
-    }
+    var rem = new Rem('main', 640);
+    rem.Draw();
   </script>
 </body>
 </html>
